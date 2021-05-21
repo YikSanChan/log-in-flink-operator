@@ -3,8 +3,11 @@ import org.apache.flink.table.api.EnvironmentSettings
 import org.apache.flink.table.api.bridge.scala.StreamTableEnvironment
 import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.functions.sink.DiscardingSink
+//import org.slf4j.LoggerFactory
 
 object Main {
+
+//  private final val LOG = LoggerFactory.getLogger(getClass)
 
   private val CreateSource =
     """
