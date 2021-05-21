@@ -3,11 +3,11 @@ import org.apache.flink.table.api.EnvironmentSettings
 import org.apache.flink.table.api.bridge.scala.StreamTableEnvironment
 import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.functions.sink.DiscardingSink
-//import org.slf4j.LoggerFactory
+import org.slf4j.LoggerFactory
 
 object Main {
 
-//  private final val LOG = LoggerFactory.getLogger(getClass)
+  private final val LOG = LoggerFactory.getLogger(getClass)
 
   private val CreateSource =
     """
@@ -30,7 +30,7 @@ object Main {
       .toDataStream(table)
       .map {row =>
         val a = row.getField("a")
-        println(a)
+        LOG.info("a = " + a)
         a
       }
       .addSink(new DiscardingSink[AnyRef])
