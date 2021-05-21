@@ -1,6 +1,8 @@
 import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
 import org.apache.flink.table.api.EnvironmentSettings
 import org.apache.flink.table.api.bridge.scala.StreamTableEnvironment
+import org.apache.flink.api.scala._
+import org.apache.flink.streaming.api.functions.sink.DiscardingSink
 
 object Main {
 
@@ -21,7 +23,14 @@ object Main {
     val tableEnv = StreamTableEnvironment.create(execEnv, settings)
     tableEnv.executeSql(CreateSource)
     val table = tableEnv.sqlQuery("SELECT a FROM source")
-    tableEnv.toDataStream(table).print()
+    tableEnv
+      .toDataStream(table)
+      .map {row =>
+        val a = row.getField("a")
+        println(a)
+        a
+      }
+      .addSink(new DiscardingSink[AnyRef])
     execEnv.execute("Streaming")
   }
 }
