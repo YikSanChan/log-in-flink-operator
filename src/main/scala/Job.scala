@@ -3,11 +3,8 @@ import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.table.api.EnvironmentSettings
 import org.apache.flink.table.api.bridge.scala.StreamTableEnvironment
-import org.slf4j.LoggerFactory
 
 object Job extends BaseJob {
-
-  private final val LOG = LoggerFactory.getLogger(getClass)
 
   private val CreateSource =
     """
@@ -36,7 +33,7 @@ object Job extends BaseJob {
       .toDataStream(table)
       .map {row =>
         val a = row.getField("a")
-        LOG.info("a = " + a)
+        LOG.info("[Job] a = " + a)
         a
       }
   }
