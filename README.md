@@ -1,10 +1,16 @@
 # Log in Flink operator
 
+The repo helps reproduce the problem stated here: http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/Task-not-serializable-when-logging-in-a-trait-method-td43911.html
+
+To reproduce, simply run the `main` method in `Job` class.
+
+---
+
 I try to log in both BaseJob and Job.
-
 The log line in Job works just fine.
+However, the log line in BaseJob throws "Task not serializable" exception.
 
-However, the log line in BaseJob throws "Task not serializable" exception. Here's the full error trace:
+Here's the full error trace:
 ```
 Exception in thread "main" org.apache.flink.api.common.InvalidProgramException: Task not serializable
 	at org.apache.flink.api.scala.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:408)
