@@ -13,7 +13,9 @@ trait BaseJob {
   def process(stream: DataStream[AnyRef]): DataStreamSink[AnyRef] = {
     stream
       .map { a =>
-//        LOG.info("[BaseJob] a = " + a)
+        // This LOG line throws Task not serializable
+        // Commenting out the LOG line, then the LOG line in Job.scala works just fine
+        LOG.info("[BaseJob] a = " + a)
         a
       }
       .addSink(new DiscardingSink[AnyRef])

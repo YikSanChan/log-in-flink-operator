@@ -33,6 +33,7 @@ object Job extends BaseJob {
       .toDataStream(table)
       .map {row =>
         val a = row.getField("a")
+        // This LOG line works just fine!
         LOG.info("[Job] a = " + a)
         a
       }
